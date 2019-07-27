@@ -1,7 +1,7 @@
 from vk_api.longpoll import VkLongPoll, VkEventType
 import vk_api
 
-token = '9abddf88021effed4810cf257c158c9ce7ad2d29279e786d85fa8d6df0d3306d4d6c956eab1112d09d0d1' # https://vkhost.github.io/ , выберите Kate Mobile и скопируйте токен из URL/
+token = 'Enter token here' # https://vkhost.github.io/ , выберите Kate Mobile и скопируйте токен из URL/
 
 vk_session = vk_api.VkApi(token=token)
 vk_api = vk_session.get_api()
