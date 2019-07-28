@@ -13,7 +13,7 @@ while True:
                 userId = str(event.text)
                 if userId.isalpha():
                     vk_session.method('messages.send', {'user_id': event.user_id,
-                                                        'message': "Please input ID",
+                                                        'message': "Please input correct ID.",
                                                         'random_id': 0})
                 if userId.isdigit():
                     response_photo_id = vk_api.users.get(user_ids=userId, fields='photo_id')
@@ -28,12 +28,12 @@ while True:
                     response_friends = vk_api.friends.get(user_id=userId)
                     friends_counter = response_friends['count']
                     response_wall = vk_api.wall.get(owner_id=userId, filter='owner')
-                    views_counter = ''
+                    views_counter = None
 
                     if friends_counter != 0:
                         percent_of_likes = str(round((likes_counter / friends_counter) * 100, 2)) + '%'
                     else:
-                        percent_of_likes = 'It is impossible to count without having friends'
+                        percent_of_likes = 'it is impossible to count without having friends.'
 
                     for i in range((len(response_wall['items']))):
                         if 'attachments' in response_wall['items'][i].keys():
@@ -41,6 +41,8 @@ while True:
                                 if 'photo' in item.values():
                                     if str(item['photo']['id']) == clear_id and 'views' in response_wall['items'][i].keys():
                                         views_counter = response_wall['items'][i]['views']['count']
+                    if views_counter == None:
+                        views_counter = 'it is impossible to count the views, because post is missing.'
                     bot_answer = 'User id - ' + id + '\n' + 'User photo id - ' + clear_id + '\n' + \
                                  'Photo URL - ' + photo_URL + '\n' + \
                                  "User's likes - " + str(likes_counter) + '\n' + \
@@ -55,8 +57,9 @@ while True:
                                                             'random_id': 0})
             except:
                 vk_session.method('messages.send', {'user_id': event.user_id,
-                                                    'message': "Please input user's ID with photo",
+                                                    'message': "Please input user's ID with photo and user's ID with open profile.",
                                                     'random_id': 0})
+
 
 
 
