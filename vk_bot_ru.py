@@ -1,7 +1,7 @@
 from vk_api.longpoll import VkLongPoll, VkEventType
 import vk_api
 
-token = 'Enter token here'  # https://vkhost.github.io/ , выберите Kate Mobile и скопируйте токен из URL/
+token = 'Enter token here'  # https://vkhost.github.io/ , выберите Kate Mobile и скопируйте токен из URL
 
 vk_session = vk_api.VkApi(token=token)
 vk_api = vk_session.get_api()
@@ -73,7 +73,7 @@ while True:
                                  "Количество просмотров на аватаре - " + str(views_counter) + '\n' + \
                                  "Количество друзей пользователя - " + str(friends_counter) + '\n' + \
                                  'Процент лайков - ' + percent_of_likes
-                    print(flag)
+ 
                 if event.from_user and not (event.from_me) and flag == 2:
                     if userId.isdigit():
                         vk_session.method('messages.send', {'user_id': event.user_id,
